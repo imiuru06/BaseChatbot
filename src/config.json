@@ -1,0 +1,14 @@
+{
+    "model_name": "gpt-3.5-turbo",
+    "provider": "openai",
+    "predefined_responses": {
+        "what is the price of the 1947 independence stamp?": "The price of the 1947 Independence Stamp varies depending on its condition and rarity. It usually ranges between INR 5000 to INR 50,000.",
+        "how can i sell my stamps?": "You can list your stamps on our platform by creating an account and submitting details about your collection.",
+        "where can i find rare stamps?": "We have a special section for rare stamps on our website. You can browse through the 'Rare Stamps' category for more information.",
+        "how does the bidding process work?": "Our bidding process is simple. You can place a bid on any stamp listed for auction. The highest bid at the end of the auction wins the item.",
+        "what is the refund policy?": "Our refund policy allows for returns within 14 days of purchase if the item does not match the description.",
+        "where is the help desk for this site": "You can reach our help desk at the following link: <a href='/helpdesk'>Help Desk</a>.",
+        "please give contact information so i can connect with you": "For contact information, please visit: <a href='/contact'>Contact Us</a>.",
+        "i want to view my cart": "You can view your cart by clicking here: <a href='/cart'>Your Cart</a>."
+    }
+}

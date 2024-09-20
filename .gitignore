@@ -1,0 +1,17 @@
+*.env
+*.log
+*.out
+*.err
+*.pid
+*.lock
+*.pid.lock
+*.sock
+*.sock.lock
+*.sock.lock.lock
+*.sock.lock.lock.lock
+
+*.pid.lock
+.env
+src/.DS_Store
+.vscode/settings.json
+.DS_Store

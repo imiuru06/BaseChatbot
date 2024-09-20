@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* Chatbot button */
+        .chatbot-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #fbf974;
+            color: white;
+            border: 100;
+            border-radius: 100%;
+            border-color:#fbf974;
+            padding: 28px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1000;
+            background-image: url('https://cdn-icons-png.flaticon.com/256/1154/1154968.png');
+            background-size: cover;  /* Make the image cover the entire button */
+            background-position: center; /* Center the image inside the button */
+            background-repeat: no-repeat; /* Ensure the image does not repeat */
+        }
+
+        .chatbot-button:hover {
+            background-color: #f90505;
+        }
+
+/* Adjust the chatbot window to increase height */
+.chatbot-window {
+    display: none;
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 350px; /* Slightly wider */
+    height: 500px; /* Increased height */
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    border: 5px solid #ffffff;
+    border-image: url('https://i.pinimg.com/originals/47/c8/e7/47c8e711cec0601b99b94805a27ce919.gif') 30 round;
+}
+
+/* Adjust the chatbot header */
+.chatbot-header {
+    background-image: url('https://img.freepik.com/free-photo/abstract-luxury-soft-red-background-christmas-valentines-layout-design-studio-room-web-template-business-report-with-smooth-circle-gradient-color_1258-54519.jpg'); /* Background image */
+    background-size: cover; /* Make sure the image covers the whole header */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent the image from repeating */
+    color: rgb(255, 255, 255); /* Text color */
+    text-align: center; /* Center the text horizontally */
+    padding: 15px; /* Padding around the text */
+    font-family: 'Bebas Neue', sans-serif; /* Font family */
+    font-size: 50px; /* Font size */
+    font-weight: 1000; /* Font weight */
+    border-radius: 10px 10px 0 0; /* Rounded corners (top-left and top-right) */
+    height: 60px; /* Height of the header */
+    display: flex; /* Flexbox for vertical centering */
+    align-items: center; /* Center text vertically */
+    justify-content: center; /* Center text horizontally */
+    
+}
+
+/* Adjust the messages area to increase space */
+.chatbot-messages {
+    padding: 10px; /* Reduced padding */
+    height: 370px; /* Increased height */
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #ff0000;
+}
+
+
+/* Adjust the input area */
+.chatbot-input {
+    padding: 5px; /* Reduced padding */
+    display: flex;
+    background-color: #ffffff;
+    border-top: 1px solid #fd0000;
+}
+
+.chatbot-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #060606;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.chatbot-input button {
+    background-color: #f5811c;
+    color: white;
+    border: none;
+    padding: 10px 12px; /* Adjusted padding */
+    margin-left: 8px; /* Adjusted margin */
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.chatbot-input button:hover {
+    background-color: #f00a0a;
+}
+
+
+        /* Chatbot messages area */
+        .chatbot-messages {
+            padding: 15px;
+            height: 320px;
+            overflow-y: auto;
+            background-color: #ffffff;
+            border-bottom: 2px solid #ff0000;
+        }
+
+       
+
+        /* Message styling */
+        .chatbot-messages div {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            max-width: 70%;
+            clear: both;
+        }
+
+        .chatbot-messages .user-message {
+            background-color: #bd0e0e;
+            color: white;
+            float: right;
+        }
+
+        .chatbot-messages .bot-message {
+            background-color: #d3d2cb;
+            color: #333;
+            float: left;
+        }
+
+        /* Envelope background for message bubbles */
+        .chatbot-messages .bot-message {
+            background-image: url('https://i.imgur.com/MaGNuTO.png');
+            background-size: cover;
+        }
+
+    </style>
+    <title>Philately Chatbot - Postman Theme</title>
+</head>
+<body>
+
+    <!-- Chatbot button -->
+    <button class="chatbot-button" onclick="toggleChatbot()"> </button>
+
+    <!-- Chatbot window -->
+    <div class="chatbot-window">
+        <div class="chatbot-header">PostPal</div>
+        
+        <div class="chatbot-messages" id="chatbotMessages">
+            <div class="bot-message">Hello! I'm your PostPal. How can I assist you today?</div>
+            <div class="bot-message">Some queries I can resolve: <br>1. How can I contact your organisation? <br>2. How can I sell my stamps? <br>3. Where can I find rare stamps? <br>4. How does the bidding process work? <br>5. What is the refund policy?</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="chatbotInput" placeholder="Type a message...">
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Toggle chatbot window
+        function toggleChatbot() {
+            const chatbotWindow = document.querySelector('.chatbot-window');
+            chatbotWindow.style.display = chatbotWindow.style.display === 'none' || chatbotWindow.style.display === '' ? 'block' : 'none';
+        }
+
+        // Send a message to the chatbot
+        function sendMessage() {
+            var userInput = document.getElementById('chatbotInput');
+            var message = userInput.value.trim();
+            
+            if (message !== '') {
+                displayMessage('You', message, 'user-message');
+                userInput.value = '';
+                
+                // POST 요청을 보내는 함수 호출
+                fetchChatbotResponse(message);
+            }
+        }
+
+        // Display a message in the chatbot window
+        function displayMessage(sender, message, className) {
+            var messagesContainer = document.getElementById('chatbotMessages');
+            var messageElement = document.createElement('div');
+            messageElement.className = className;
+            messageElement.innerHTML = '<strong>' + sender + ':</strong> ' + message;
+            messagesContainer.appendChild(messageElement);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        // 백엔드 API를 호출하여 챗봇 응답을 가져옵니다
+        function fetchChatbotResponse(message) {
+            fetch('http://127.0.0.1:5000/chatbot', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayMessage('Bot', data.response, 'bot-message');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                displayMessage('Bot', '죄송합니다. 오류가 발생했습니다. 나중에 다시 시도해 주세요.', 'bot-message');
+            });
+        }
+
+        // Enter 키 입력 시 sendMessage 함수 호출
+        document.getElementById('chatbotInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+
+</body>
+</html>
+
+
+
