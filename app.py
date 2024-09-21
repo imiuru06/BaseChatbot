@@ -1,10 +1,10 @@
 from flask import Flask, request, jsonify
-from flask_cors import CORS
+# from flask_cors import CORS
 from src.config import config
 from src.langchain_setup import get_chatbot_response
 
 app = Flask(__name__)
-CORS(app)
+# CORS(app)
 
 predefined_responses = config.get('predefined_responses', {})
 
